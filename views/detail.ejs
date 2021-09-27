@@ -75,6 +75,10 @@
             });
         }
 
+        function go_edit() {
+            window.location.href='/post/edit?postTime='+ postTime;
+        }
+
   </script>
   <body>
     <h1>
@@ -107,5 +111,8 @@
            ---------------------------------------------------
          </a>
     </div>
+    <button onclick="go_edit()">
+        수 정 하 기
+    </button>
   </body>
 </html>

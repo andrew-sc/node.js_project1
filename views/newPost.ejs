@@ -93,7 +93,7 @@
                제목을 입력해 주세요
             </label>
             <p></p>
-            <input type="text" id="new_title" style="height: 20px; width: 50%;">
+            <input type="text" id="new_title" style="height: 20px; width: 50%;" required>
         </div>
         <p></p>
         <div id="writerInput">
@@ -101,7 +101,7 @@
                 작성자를 입력해 주세요
             </label>
             <p></p>
-            <input type="text" id="new_writer" style="height: 20px; width: 50%;">
+            <input type="text" id="new_writer" style="height: 20px; width: 50%;" required>
         </div>
         <p></p>
         <div id="pwInput">
@@ -109,7 +109,7 @@
                 비밀번호를 입력해 주세요
             </label>
             <p></p>
-            <input type="password" id="new_pw" style="height: 20px; width: 50%;">
+            <input type="password" id="new_pw" style="height: 20px; width: 50%;" required>
         </div>
         <p></p>
         <div id="contentsInput">
@@ -117,16 +117,16 @@
                 내용을 입력해 주세요
             </label>
             <p></p>
-            <textarea id="new_contents" style="height: 100px; width: 50%;"></textarea>
-        </div>
-        <p></p>
+            <textarea id="new_contents" style="height: 100px; width: 50%;" required></textarea>
+        </div>        
+      </div>
+      <p></p>
         <button onclick="new_post()">
             글 쓰 기
         </button>
         <p></p>
         <a>
             ---------------------------------------------------
-        </a>        
-      </div>
+        </a>
   </body>
 </html>

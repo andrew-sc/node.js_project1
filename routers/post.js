@@ -38,17 +38,40 @@ router.post("/post/add", async(req, res, next) => {
 //     포스트 상세페이지 - 완
 // 제목, 작성자명, 날짜, 작성 내용을 띄워줌
 router.get("/post/detail/:postTime", async (req, res) => {
-
+   
     const { postTime } = req.params;
+    
     post_result = await Post.findOne({ postTime : postTime });
     res.json({ result : post_result })
 });
 
 //     포스트 수정기능
-// 수정하기 클릭시 원래 값 유지상태로 도출
+// 수정하기 클릭시 원래 값 유지상태로 도출 - 버튼
 // 비밀번호 비워두기
 // 수정완료btn 삭제하기btn
 // 비밀번호 비교 후 동일할 때만 실행
+
+// db에서 값들을 끌어오는 것은 상세페이지의 api사용!!
+
+router.post("/post/edit/save", async(req, res) => { // db에서 해당 post의 값을 수정하기
+    
+    const { title_edited, writer_edited, pw_edited, contents_edited, postTime } = await req.body;
+    console.log(title_edited, writer_edited, pw_edited, contents_edited, postTime)
+
+    const result = await Post.findOne({ postTime });
+    console.log(result)
+    const pwOrigin = result["pw"];
+    console.log(pwOrigin, String(pwOrigin))
+    if( pw_edited === String(pwOrigin)) {
+        await Post.updateOne({ postTime: postTime }, { $set: { "title" : title_edited, "writer": writer_edited, "contents": contents_edited} });
+        res.send({result : "success"})
+    } else {
+        console.log("pw가 옳바르지 않습니다.")
+        res.send({result : "failure"})
+    }
+});
+
+
 
 //     포스트 삭제기능
 // 비밀번호 비교 후 동일할 때만 실행

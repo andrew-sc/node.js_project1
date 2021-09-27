@@ -10,6 +10,13 @@
       <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   </head>
+  <style>
+
+      .title {
+          cursor: pointer;
+      }
+
+  </style>
   <script>
       $(document).ready(function() {
         get_all_posts()
@@ -40,7 +47,7 @@
             let postingDate = dateY + "-" + dateM + "-" + dateD
              
             let htmlTemp = `<p></p>
-                            <a id="title" onclick="window.location.href='/post/detail?postTime=${post["postTime"]}'">
+                            <a class="title" id="title" onclick="window.location.href='/post/detail?postTime=${post["postTime"]}'">
                                 title : ${post["title"]}
                             </a>
                             <p></p>
@@ -69,7 +76,7 @@
       </a>
       <div id="postlist">
           <p></p>
-          <a id="title">
+          <a id="title" class="title">
               title : test title
           </a>
           <p></p>
