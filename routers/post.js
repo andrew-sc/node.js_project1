@@ -35,8 +35,14 @@ router.post("/post/add", async(req, res, next) => {
 
 
 
-//     포스트 상세페이지
+//     포스트 상세페이지 - 완
 // 제목, 작성자명, 날짜, 작성 내용을 띄워줌
+router.get("/post/detail/:postTime", async (req, res) => {
+
+    const { postTime } = req.params;
+    post_result = await Post.findOne({ postTime : postTime });
+    res.json({ result : post_result })
+});
 
 //     포스트 수정기능
 // 수정하기 클릭시 원래 값 유지상태로 도출

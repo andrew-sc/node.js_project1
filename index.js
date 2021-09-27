@@ -45,7 +45,8 @@ app.get('/post/edit', (req, res) => {
 })
 
 app.get('/post/detail', (req, res) => {
-    res.render('detail');
+    let postTime = req.query.name;
+    res.render('detail', { postTime });
 })
 
 

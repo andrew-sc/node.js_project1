@@ -40,7 +40,7 @@
             let postingDate = dateY + "-" + dateM + "-" + dateD
              
             let htmlTemp = `<p></p>
-                            <a id="title">
+                            <a id="title" onclick="window.location.href='/post/detail?postTime=${post["postTime"]}'">
                                 title : ${post["title"]}
                             </a>
                             <p></p>
