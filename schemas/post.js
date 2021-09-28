@@ -4,15 +4,14 @@ const { Schema } = mongoose;
 const postSchema = new Schema({
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   writer: {
       type: String,
       required: true
   },
   pw: {
-    type: Number,
+    type: String,
     required: true
   },
   contents: {

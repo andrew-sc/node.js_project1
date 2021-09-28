@@ -63,7 +63,7 @@ router.post("/post/edit/save", async(req, res) => { // db에서 해당 post의 �
     console.log(result)
     const pwOrigin = result["pw"];
     console.log(pwOrigin, String(pwOrigin))
-    if( pw_edited === String(pwOrigin)) {
+    if( pw_edited === pwOrigin) {
         await Post.updateOne({ postTime: postTime }, { $set: { "title" : title_edited, "writer": writer_edited, "contents": contents_edited} });
         res.send({result : "success"})
     } else {
@@ -84,7 +84,7 @@ router.delete("/post/edit/delete/:postTime", async (req,res) => {
     const pwOrigin = await Post.findOne({postTime});
     console.log(pwOrigin.pw);
     
-    if(inPutPw == pwOrigin.pw) {
+    if(inPutPw === pwOrigin.pw) {
         await Post.deleteOne({postTime});
         console.log("삭제 완료")
         res.send({ result: "success" });
