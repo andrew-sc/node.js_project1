@@ -1,6 +1,7 @@
 const express = require("express");
 const Post = require("../schemas/post");
 const allPost = require("../schemas/all_post");
+const post = require("../schemas/post");
 
 const router = express.Router();
 
@@ -75,6 +76,22 @@ router.post("/post/edit/save", async(req, res) => { // db에서 해당 post의 �
 
 //     포스트 삭제기능
 // 비밀번호 비교 후 동일할 때만 실행
+router.delete("/post/edit/delete/:postTime", async (req,res) => {
+    const postTime = req.params.postTime;
+    console.log(postTime);
+    const inPutPw = req.body.inPutPw;
+    console.log(inPutPw);
+    const pwOrigin = await Post.findOne({postTime});
+    console.log(pwOrigin.pw);
+    
+    if(inPutPw == pwOrigin.pw) {
+        await Post.deleteOne({postTime});
+        console.log("삭제 완료")
+        res.send({ result: "success" });
+    } else {
+        res.send({ result: "fail" });
+    }
+})
 
 //구현?
 //      검색기능

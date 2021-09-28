@@ -101,8 +101,9 @@
                 error: function(xhr, status, error) {
                     if (status == 404) {
                     alert("페이지를 불러오지 못했습니다.");
+                    alert("메인 페이지로 돌아 갑니다.");
+                    window.location.herf="/main";
                     }
-//                    window.location.herf="/main"
                 },
                 success: function(response){
                     if (response["result"] == "success"){
@@ -123,6 +124,34 @@
                     }
                 }
             });
+        }
+
+        function delete_post() {
+            
+            let pw_edited = $('#target_pw').val();
+            console.log(pw_edited);
+
+            $.ajax({
+                type: "DELETE",
+                url: `/api/post/edit/delete/${postTime}`,
+                data: { 
+                    inPutPw : pw_edited
+                },
+                error: function(xhr, status, error) {
+                    if (status == 404) {
+                    alert("오류 발생 상세페이지로 돌아갑니다.");
+                    }
+                    window.location.herf="/post/detail?postTime="+ postTime;
+                },success: function(response){
+                    if (response["result"] == "success"){
+                        alert("삭제가 완료되었습니다.")
+                        window.location.herf="/main"
+                    } else if (response["result"] == "fail") {
+                        alert("비밀 번호가 일치하지 않습니다. 다시 돌아갑니다.")
+                        window.location.href='/post/detail?postTime=' + postTime;
+                    }
+                }
+            })                       
         }
 
   </script>
@@ -179,7 +208,7 @@
             수 정 완 료
         </button>
         <p></p>
-        <button onclick="">
+        <button onclick="delete_post()">
             삭 제 하 기
         </button>
     </div>

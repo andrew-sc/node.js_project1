@@ -40,13 +40,13 @@ app.get('/post', (req, res) => {
     res.render('newPost');
 })
 
-app.get('/post/edit', (req, res) => {
-    res.render('edit');
-})
-
 app.get('/post/detail', (req, res) => {
     let postTime = req.query.name;
     res.render('detail', { postTime });
+})
+
+app.get('/post/edit', (req, res) => {
+    res.render('edit');
 })
 
 
