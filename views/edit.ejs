@@ -89,7 +89,7 @@
             console.log(title_edited, writer_edited, pw_edited, contents_edited, postTime_origin);
 
             $.ajax({
-                type: "POST",
+                type: "PUT",
                 url: `/api/post/edit/save`,
                 data: {
                     title_edited: title_edited,

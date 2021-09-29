@@ -37,11 +37,11 @@ router.post("/post/add", async(req, res, next) => {
 
 //     포스트 상세페이지 - 완
 // 제목, 작성자명, 날짜, 작성 내용을 띄워줌
-router.get("/post/detail/:postTime", async (req, res) => {
+router.get("/post/detail/", async (req, res) => {
    
     const { postTime } = req.params;
     
-    post_result = await Post.findOne({ postTime : postTime });
+    const post_result = await Post.findOne({ postTime : postTime });
     res.json({ result : post_result })
 });
 
@@ -53,12 +53,12 @@ router.get("/post/detail/:postTime", async (req, res) => {
 
 // db에서 값들을 끌어오는 것은 상세페이지의 api사용!!
 
-router.post("/post/edit/save", async(req, res) => { // db에서 해당 post의 값을 수정하기
+router.put("/post/edit/save", async(req, res) => { // db에서 해당 post의 값을 수정하기
     
-    const { title_edited, writer_edited, pw_edited, contents_edited, postTime } = await req.body;
+    const { title_edited, writer_edited, pw_edited, contents_edited, postTime } = await req.body; //새로입력
     console.log(title_edited, writer_edited, pw_edited, contents_edited, postTime)
 
-    const result = await Post.findOne({ postTime });
+    const result = await Post.findOne({ postTime }); //기존입력녀석
     console.log(result)
     const pwOrigin = result["pw"];
     console.log(pwOrigin, String(pwOrigin))
@@ -75,7 +75,7 @@ router.post("/post/edit/save", async(req, res) => { // db에서 해당 post의 �
 
 //     포스트 삭제기능
 // 비밀번호 비교 후 동일할 때만 실행
-router.delete("/post/edit/delete/:postTime", async (req,res) => {
+router.delete("/post/edit/delete/", async (req,res) => {
     const postTime = req.params.postTime;
     console.log(postTime);
     const inPutPw = req.body.inPutPw;
