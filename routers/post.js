@@ -37,7 +37,7 @@ router.post("/post/add", async(req, res, next) => {
 
 //     포스트 상세페이지 - 완
 // 제목, 작성자명, 날짜, 작성 내용을 띄워줌
-router.get("/post/detail/", async (req, res) => {
+router.get("/post/detail/:postTime", async (req, res) => {
    
     const { postTime } = req.params;
     
@@ -75,7 +75,7 @@ router.put("/post/edit/save", async(req, res) => { // db에서 해당 post의 �
 
 //     포스트 삭제기능
 // 비밀번호 비교 후 동일할 때만 실행
-router.delete("/post/edit/delete/", async (req,res) => {
+router.delete("/post/edit/delete/:postTime", async (req,res) => {
     const postTime = req.params.postTime;
     console.log(postTime);
     const inPutPw = req.body.inPutPw;
