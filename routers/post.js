@@ -1,9 +1,8 @@
 const express = require("express");
+const router = express.Router();
+
 const Post = require("../schemas/post");
 const allPost = require("../schemas/all_post");
-const post = require("../schemas/post");
-
-const router = express.Router();
 
 
 // 요구
@@ -27,10 +26,10 @@ router.get("/main", async(req, res) => {
 // 글쓰기 버튼 > 게시글 목록조회 페이지 + 작성게시물이 1번으로 도출
 
 router.post("/post/add", async(req, res, next) => {
-    const { title, writer, pw, contents, postTime } = await req.body;
+    const { title, writer, pw, contents, postTime } = await req.body; // {키:벨류, 키:벨류 ...} 의 형태로의 지정 형식
     //console.log(title, writer, pw, contents, postTime)
 
-    await Post.create({ title, writer, pw, contents, postTime });
+    await Post.create({ title, writer, pw, contents, postTime }); // 몽구스에서 자동으로 갑과 같은 이름으로 컬럼들을 만들어줌
     res.send({result : "success"})
 })
 

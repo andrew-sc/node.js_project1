@@ -1,24 +1,22 @@
 const express = require('express');
 const app = express();
-// 아래는 미들웨어로써 put,post 등의 기능을 사용할 때 보다 간편하게 쓸수 있게 도와주는 미들웨어
-app.use(express.urlencoded({extended: true}))
-app.use(express.json()) //json화 해주는 것, res.body라고하면 가공이 되어지게끔 만든다
 const port = 3000;
 const mongoose = require('mongoose');
 
 const connect = require('./schemas/all_post'); //만들어놓은 schemas와 연결
 connect();
 
-const postRouter = require("./routers/post") // routes안의 post와 연결시켜주는 것
-app.use("/api", postRouter);
+const postRouter = require("./routers/post"); // routes안의 post와 연결시켜주는 것
+const post = require('./schemas/post');
 
-app.set('view engine', 'ejs'); //views에 있는 ejs들을 가져다 쓸 것을 세팅
 app.set('views', __dirname + '/views'); //ejs형식으로 사용할 view의 위치정보/__dirname은 현재 위치정보
+app.set('view engine', 'ejs'); //views에 있는 ejs들을 가져다 쓸 것을 세팅
 
-
-
+// 아래는 미들웨어로써 put,post 등의 기능을 사용할 때 보다 간편하게 쓸수 있게 도와주는 미들웨어
+app.use(express.urlencoded({extended: true}))
+app.use(express.json()) //json화 해주는 것, res.body라고하면 가공이 되어지게끔 만든다
 app.use(express.static('public')); // static안의 컨텐츠를 사용할 수 있게 하는 미들웨어
-
+app.use("/api", postRouter);
 
 
 app.use((req, res, next) => { // 미들웨어; 이후로 가기전에 먼저 이 과정을 거치게 만든다
@@ -31,7 +29,11 @@ app.get('/', (req, res) => {
     res.render('toMain');
 })
 
-app.get('/main', (req, res) => {
+app.get('/main', async (req, res) => {
+    // const Posts = await post.find({}).sort({"postTime": -1});
+    // console.log(Posts);
+    // { Posts }
+
     res.render('main');
 })
 
@@ -48,7 +50,6 @@ app.get('/post/detail', (req, res) => {
 app.get('/post/edit', (req, res) => {
     res.render('edit');
 })
-
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`)
